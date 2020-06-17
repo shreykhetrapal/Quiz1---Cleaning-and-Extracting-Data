@@ -1,5 +1,6 @@
 #  Quiz 1 Cleaning and Extracting data 
 
+PATH <- '/Users/Shrey/Desktop/Data Science JHU/Quiz1---Cleaning-and-Extracting-Data/'
 # ---- Question 1 ----
 # The American Community Survey distributes downloadable data about United States communities. Download the 2006 microdata survey about housing for the state of Idaho using download.file() from here:
 
@@ -17,6 +18,24 @@ data<-fread('housing.csv')
 
 data[, .N,VAL==24] # To calculate frequency of variable VAL where value is 24
 
+
+
+# --- Question 3 -----
+#Download the Excel spreadsheet on Natural Gas Aquisition Program here:
+  
+#https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FDATA.gov_NGAP.xlsx
+
+#Read rows 18-23 and columns 7-15 into R and assign the result to a variable called 'dat'
+
+# install.package('readxl')
+
+download.file('https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FDATA.gov_NGAP.xlsx','/Users/Shrey/Desktop/Data Science JHU/Quiz1---Cleaning-and-Extracting-Data/question3.xlsx',method = 'curl')
+library(readxl)
+
+# Important way to read excel files below
+dat<- xlsx::read.xlsx('question3.xlsx',sheetIndex = 1,rowIndex = 18:23,colIndex = 7:15)
+
+sum(dat$Zip*dat$Ext,na.rm=T)
 
 #  ----- Question 4 - Read the XML data on Baltimore restaurants from here: -----
   
@@ -67,11 +86,11 @@ table(data==21231) # Number of true values is the required answer.
 
 fileURL <- 'https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06pid.csv'
 
-download.file(fileURL,'/Users/Shrey/Desktop/Data Science JHU/Quiz1---Cleaning-and-Extracting-Data/dataFile.csv')
+download.file(fileURL,'/Users/Shrey/Desktop/Data Science JHU/Quiz1---Cleaning-and-Extracting-Data/question5.csv')
 
 
 library(data.table)
 
-DT <- fread('dataFile.csv')
+DT <- fread('question5.csv')
 
 # Now use system.time(<expression in choices>) to calculate the fastest time
